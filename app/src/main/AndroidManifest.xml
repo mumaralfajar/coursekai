@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Coursekai"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.login.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.splash.SplashActivity"
             android:exported="false" />
         <activity
