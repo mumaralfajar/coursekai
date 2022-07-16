@@ -2,7 +2,6 @@ package com.mumaralfajar.coursekai.presentation.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.mumaralfajar.coursekai.R
 import com.mumaralfajar.coursekai.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {

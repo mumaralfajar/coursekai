@@ -4,12 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1945" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/bg_btn_auth_color_primary.xml" value="0.1185" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/bg_btn_auth_primary.xml" value="0.1945" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/bg_btn_auth_white.xml" value="0.1945" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/bg_edit_text.xml" value="0.1945" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1185" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1945" />
-        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
       </map>
     </option>

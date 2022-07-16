@@ -68,7 +68,7 @@
                 android:textColor="@color/black"
                 android:textColorHint="#4D000000"
                 android:inputType="textPassword"
-                android:autofillHints="password" />
+                android:importantForAutofill="no" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
