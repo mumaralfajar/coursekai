@@ -14,13 +14,16 @@
         android:theme="@style/Theme.Coursekai"
         tools:targetApi="31">
         <activity
-            android:name=".ChangePasswordActivity"
+            android:name=".presentation.content.ContentActivity"
             android:exported="false" />
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".presentation.changepassword.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".presentation.forgotpassword.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.register.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.login.LoginActivity"

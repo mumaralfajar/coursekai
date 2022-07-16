@@ -8,14 +8,21 @@
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/bg_btn_auth_primary.xml" value="0.1945" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/bg_btn_auth_white.xml" value="0.1945" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/bg_edit_text.xml" value="0.1945" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/bg_edit_text_search.xml" value="0.1185" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/bg_index.xml" value="0.1185" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1185" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1945" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_change_password.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_content.xml" value="0.18" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_forgot_password.xml" value="0.18" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_login.xml" value="0.22" />
-        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/item_material.xml" value="0.5" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/item_page.xml" value="0.203125" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/layout_markdown.xml" value="0.203125" />
+        <entry key="..\:/Users/UMAR/AndroidStudioProjects/Coursekai/app/src/main/res/layout/layout_youtube.xml" value="0.203125" />
       </map>
     </option>
   </component>
