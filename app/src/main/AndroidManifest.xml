@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Coursekai"
         tools:targetApi="31">
         <activity
-            android:name=".UserActivity"
+            android:name=".presentation.user.UserActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.content.ContentActivity"
@@ -33,16 +33,16 @@
             android:exported="false" />
         <activity
             android:name=".presentation.splash.SplashActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.main.MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.main.MainActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>
