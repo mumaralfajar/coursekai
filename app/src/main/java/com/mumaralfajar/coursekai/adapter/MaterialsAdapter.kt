@@ -57,6 +57,8 @@ class MaterialsAdapter : RecyclerView.Adapter<MaterialsAdapter.ViewHolder>(), Fi
                 .placeholder(android.R.color.darker_gray)
                 .into(materialBinding.ivMaterial)
 
+            materialBinding.tvTitleMaterial.text = material.titleMaterial
+
             listener?.let {
                 itemView.setOnClickListener {
                     it(material, adapterPosition)
