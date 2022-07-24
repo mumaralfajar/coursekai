@@ -8,6 +8,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
 import com.mumaralfajar.coursekai.adapter.MaterialsAdapter
 import com.mumaralfajar.coursekai.databinding.ActivityMainBinding
+import com.mumaralfajar.coursekai.presentation.content.ContentActivity
 import com.mumaralfajar.coursekai.presentation.user.UserActivity
 import com.mumaralfajar.coursekai.repository.Repository
 import org.jetbrains.anko.startActivity
@@ -21,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
-
 
         materialsAdapter = MaterialsAdapter()
 
@@ -40,10 +40,6 @@ class MainActivity : AppCompatActivity() {
                     materialsAdapter.materials = it
                 }
             }, 1200)
-
-//        materials?.let {
-//            materialsAdapter.materials = it
-//        }
 
         mainBinding.rvMaterialsMain.adapter = materialsAdapter
     }
@@ -78,6 +74,13 @@ class MainActivity : AppCompatActivity() {
             swipeMain.setOnRefreshListener {
                 getDataMaterial()
             }
+        }
+
+        materialsAdapter.onClick { material, position ->
+            startActivity<ContentActivity>(
+                ContentActivity.EXTRA_MATERIAL to material,
+                ContentActivity.EXTRA_POSITION to position
+            )
         }
     }
 }
