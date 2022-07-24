@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "900814175972",
+    "project_id": "coursekai",
+    "storage_bucket": "coursekai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900814175972:android:f12a6998f7890b32fe76f1",
+        "android_client_info": {
+          "package_name": "com.mumaralfajar.coursekai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "900814175972-mcndjvp0e3f9us44ed8pqlp63p1tfuqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaARV10j4rtt0MD_9veqUp1MdfUE4KrQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "900814175972-mcndjvp0e3f9us44ed8pqlp63p1tfuqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
