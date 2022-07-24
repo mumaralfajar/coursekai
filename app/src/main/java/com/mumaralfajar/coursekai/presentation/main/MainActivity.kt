@@ -11,13 +11,16 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.mumaralfajar.coursekai.adapter.MaterialsAdapter
 import com.mumaralfajar.coursekai.databinding.ActivityMainBinding
+import com.mumaralfajar.coursekai.model.Material
 import com.mumaralfajar.coursekai.model.User
 import com.mumaralfajar.coursekai.presentation.content.ContentActivity
 import com.mumaralfajar.coursekai.presentation.user.UserActivity
 import com.mumaralfajar.coursekai.repository.Repository
-import com.mumaralfajar.coursekai.utils.showDialogError
+import com.mumaralfajar.coursekai.utils.*
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var materialsAdapter: MaterialsAdapter
     private lateinit var userDatabase: DatabaseReference
+    private lateinit var materialDatabase: DatabaseReference
     private var currentUser: FirebaseUser? = null
 
     private var listenerUser = object : ValueEventListener {
@@ -54,7 +58,45 @@ class MainActivity : AppCompatActivity() {
             Log.e("MainActivity", "[onCancelled] - ${error.message}")
             showDialogError(this@MainActivity, error.message)
         }
+    }
 
+    private var listenerMaterial = object: ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            hideLoading()
+            if (snapshot.value != null) {
+                showData()
+                val json = Gson().toJson(snapshot.value)
+                val type = object : TypeToken<MutableList<Material>>() {}.type
+                val materials = Gson().fromJson<MutableList<Material>>(json, type)
+
+                materials?.let { materialsAdapter.materials = it }
+            } else {
+                showEmptyData()
+            }
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            hideLoading()
+            Log.e("MainActivity", "[onCancelled] - ${error.message}")
+            showDialogError(this@MainActivity, error.message)
+        }
+
+    }
+
+    private fun showEmptyData() {
+        mainBinding.apply {
+            ivEmptyData.visible()
+            etSearchMain.disabled()
+            rvMaterialsMain.gone()
+        }
+    }
+
+    private fun showData() {
+        mainBinding.apply {
+            ivEmptyData.gone()
+            etSearchMain.enabled()
+            rvMaterialsMain.visible()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,10 +106,11 @@ class MainActivity : AppCompatActivity() {
 
         materialsAdapter = MaterialsAdapter()
         userDatabase = FirebaseDatabase.getInstance().getReference("users")
+        materialDatabase = FirebaseDatabase.getInstance().getReference("materials")
         currentUser = FirebaseAuth.getInstance().currentUser
 
         getDataFirebase()
-        getDataMaterial()
+//        getDataMaterial()
         onAction()
     }
 
@@ -76,6 +119,11 @@ class MainActivity : AppCompatActivity() {
         userDatabase
             .child(currentUser?.uid.toString())
             .addValueEventListener(listenerUser)
+
+        materialDatabase
+            .addValueEventListener(listenerMaterial)
+
+        mainBinding.rvMaterialsMain.adapter = materialsAdapter
     }
 
     override fun onResume() {
@@ -86,20 +134,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getDataMaterial() {
-        showLoading()
-        val materials = Repository.getMaterials(this)
-
-        Handler(Looper.getMainLooper())
-            .postDelayed({
-                hideLoading()
-                materials?.let {
-                    materialsAdapter.materials = it
-                }
-            }, 1200)
-
-        mainBinding.rvMaterialsMain.adapter = materialsAdapter
-    }
+//    private fun getDataMaterial() {
+//        showLoading()
+//        val materials = Repository.getMaterials(this)
+//
+//        Handler(Looper.getMainLooper())
+//            .postDelayed({
+//                hideLoading()
+//                materials?.let {
+//                    materialsAdapter.materials = it
+//                }
+//            }, 1200)
+//
+//        mainBinding.rvMaterialsMain.adapter = materialsAdapter
+//    }
 
     private fun hideLoading() {
         mainBinding.swipeMain.isRefreshing = false
@@ -130,7 +178,6 @@ class MainActivity : AppCompatActivity() {
 
             swipeMain.setOnRefreshListener {
                 getDataFirebase()
-                getDataMaterial()
             }
         }
 
