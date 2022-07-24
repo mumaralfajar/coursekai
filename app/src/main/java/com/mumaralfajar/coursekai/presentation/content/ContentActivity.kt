@@ -4,11 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.viewpager.widget.ViewPager
 import com.mumaralfajar.coursekai.adapter.PagesAdapter
 import com.mumaralfajar.coursekai.databinding.ActivityContentBinding
 import com.mumaralfajar.coursekai.model.Material
 import com.mumaralfajar.coursekai.model.Page
+import com.mumaralfajar.coursekai.presentation.main.MainActivity
 import com.mumaralfajar.coursekai.repository.Repository
+import com.mumaralfajar.coursekai.utils.disabled
+import com.mumaralfajar.coursekai.utils.enabled
+import com.mumaralfajar.coursekai.utils.invisible
+import com.mumaralfajar.coursekai.utils.visible
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class ContentActivity : AppCompatActivity() {
@@ -17,6 +24,7 @@ class ContentActivity : AppCompatActivity() {
         const val EXTRA_MATERIAL = "extra_material"
         const val EXTRA_POSITION = "extra_position"
     }
+
     private lateinit var contentBinding: ActivityContentBinding
     private lateinit var pagesAdapter: PagesAdapter
     private var currentPosition = 0
@@ -30,6 +38,35 @@ class ContentActivity : AppCompatActivity() {
         pagesAdapter = PagesAdapter(this)
         getDataIntent()
         onAction()
+        viewPagerCurrentPosition()
+    }
+
+    private fun viewPagerCurrentPosition() {
+        contentBinding.vpContent.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                val totalIndex = pagesAdapter.count
+                currentPosition = position
+                val textIndex = "${currentPosition + 1} / $totalIndex"
+                contentBinding.tvIndexContent.text = textIndex
+
+                if (currentPosition == 0) {
+                    contentBinding.btnPrevContent.invisible()
+                    contentBinding.btnPrevContent.disabled()
+                } else {
+                    contentBinding.btnPrevContent.visible()
+                    contentBinding.btnPrevContent.enabled()
+                }
+            }
+
+            override fun onPageSelected(position: Int) {}
+
+            override fun onPageScrollStateChanged(state: Int) {}
+
+        })
     }
 
     private fun getDataIntent() {
@@ -54,6 +91,9 @@ class ContentActivity : AppCompatActivity() {
                 pagesAdapter.pages = content?.pages as MutableList<Page>
                 contentBinding.vpContent.adapter = pagesAdapter
                 contentBinding.vpContent.setPagingEnabled(false)
+
+                val textIndex = "${currentPosition + 1} / ${pagesAdapter.count}"
+                contentBinding.tvIndexContent.text = textIndex
             }, 1200)
     }
 
@@ -70,11 +110,18 @@ class ContentActivity : AppCompatActivity() {
             btnCloseContent.setOnClickListener { finish() }
 
             btnNextContent.setOnClickListener {
-                toast("Next")
+                if (currentPosition < pagesAdapter.count - 1) {
+                    contentBinding.vpContent.currentItem += 1
+                } else {
+                    startActivity<MainActivity>(
+                        MainActivity.EXTRA_MATERIAL to materialPosition + 1
+                    )
+                    finish()
+                }
             }
 
             btnPrevContent.setOnClickListener {
-                toast("Prev")
+                contentBinding.vpContent.currentItem -= 1
             }
 
             swipeContent.setOnRefreshListener { getDataIntent() }
