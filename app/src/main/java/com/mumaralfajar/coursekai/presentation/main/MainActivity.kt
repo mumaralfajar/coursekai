@@ -4,13 +4,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 import com.mumaralfajar.coursekai.adapter.MaterialsAdapter
 import com.mumaralfajar.coursekai.databinding.ActivityMainBinding
+import com.mumaralfajar.coursekai.model.User
 import com.mumaralfajar.coursekai.presentation.content.ContentActivity
 import com.mumaralfajar.coursekai.presentation.user.UserActivity
 import com.mumaralfajar.coursekai.repository.Repository
+import com.mumaralfajar.coursekai.utils.showDialogError
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +29,33 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var materialsAdapter: MaterialsAdapter
+    private lateinit var userDatabase: DatabaseReference
+    private var currentUser: FirebaseUser? = null
+
+    private var listenerUser = object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            hideLoading()
+            val user = snapshot.getValue(User::class.java)
+            user?.let {
+                mainBinding.apply {
+                    tvNameUserMain.text = it.nameUser
+
+                    Glide
+                        .with(this@MainActivity)
+                        .load(it.avatarUser)
+                        .placeholder(android.R.color.darker_gray)
+                        .into(ivAvatarMain)
+                }
+            }
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            hideLoading()
+            Log.e("MainActivity", "[onCancelled] - ${error.message}")
+            showDialogError(this@MainActivity, error.message)
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +63,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(mainBinding.root)
 
         materialsAdapter = MaterialsAdapter()
+        userDatabase = FirebaseDatabase.getInstance().getReference("users")
+        currentUser = FirebaseAuth.getInstance().currentUser
 
+        getDataFirebase()
         getDataMaterial()
         onAction()
+    }
+
+    private fun getDataFirebase() {
+        showLoading()
+        userDatabase
+            .child(currentUser?.uid.toString())
+            .addValueEventListener(listenerUser)
     }
 
     override fun onResume() {
@@ -85,6 +129,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             swipeMain.setOnRefreshListener {
+                getDataFirebase()
                 getDataMaterial()
             }
         }
