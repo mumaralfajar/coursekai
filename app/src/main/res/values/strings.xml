@@ -23,6 +23,10 @@
     <string name="user_profile">User Profile</string>
     <string name="error">Error</string>
     <string name="success">Success</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="close">Close</string>
+    <string name="content">Content</string>
     <string name="please_wait">Please wait&#8230;</string>
     <string name="please_field_your_name">Please field your name</string>
     <string name="please_field_your_confirm_password">Please field your confirm password</string>
