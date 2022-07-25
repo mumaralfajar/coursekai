@@ -2,8 +2,6 @@ package com.mumaralfajar.coursekai.presentation.content
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.viewpager.widget.ViewPager
 import com.google.firebase.database.*
 import com.google.gson.Gson
@@ -13,10 +11,8 @@ import com.mumaralfajar.coursekai.model.Content
 import com.mumaralfajar.coursekai.model.Material
 import com.mumaralfajar.coursekai.model.Page
 import com.mumaralfajar.coursekai.presentation.main.MainActivity
-import com.mumaralfajar.coursekai.repository.Repository
 import com.mumaralfajar.coursekai.utils.*
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 
 class ContentActivity : AppCompatActivity() {
 

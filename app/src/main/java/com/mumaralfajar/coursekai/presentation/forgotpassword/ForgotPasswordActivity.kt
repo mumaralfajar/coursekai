@@ -13,7 +13,6 @@ import com.mumaralfajar.coursekai.utils.hideSoftKeyboard
 import com.mumaralfajar.coursekai.utils.showDialogError
 import com.mumaralfajar.coursekai.utils.showDialogLoading
 import com.mumaralfajar.coursekai.utils.showDialogSuccess
-import org.jetbrains.anko.toast
 
 class ForgotPasswordActivity : AppCompatActivity() {
 

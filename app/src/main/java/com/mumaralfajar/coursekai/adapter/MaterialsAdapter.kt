@@ -46,7 +46,6 @@ class MaterialsAdapter : RecyclerView.Adapter<MaterialsAdapter.ViewHolder>(), Fi
             materialsFilter = results?.values as MutableList<Material>
             notifyDataSetChanged()
         }
-
     }
 
     class ViewHolder(private val materialBinding: ItemMaterialBinding)

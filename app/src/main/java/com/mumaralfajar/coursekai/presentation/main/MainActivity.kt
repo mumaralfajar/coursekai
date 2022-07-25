@@ -2,8 +2,6 @@ package com.mumaralfajar.coursekai.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -19,7 +17,6 @@ import com.mumaralfajar.coursekai.model.Material
 import com.mumaralfajar.coursekai.model.User
 import com.mumaralfajar.coursekai.presentation.content.ContentActivity
 import com.mumaralfajar.coursekai.presentation.user.UserActivity
-import com.mumaralfajar.coursekai.repository.Repository
 import com.mumaralfajar.coursekai.utils.*
 import org.jetbrains.anko.startActivity
 
