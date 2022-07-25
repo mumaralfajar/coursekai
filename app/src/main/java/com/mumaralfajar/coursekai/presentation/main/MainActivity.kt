@@ -110,7 +110,6 @@ class MainActivity : AppCompatActivity() {
         currentUser = FirebaseAuth.getInstance().currentUser
 
         getDataFirebase()
-//        getDataMaterial()
         onAction()
     }
 
@@ -133,21 +132,6 @@ class MainActivity : AppCompatActivity() {
             mainBinding.rvMaterialsMain.smoothScrollToPosition(position)
         }
     }
-
-//    private fun getDataMaterial() {
-//        showLoading()
-//        val materials = Repository.getMaterials(this)
-//
-//        Handler(Looper.getMainLooper())
-//            .postDelayed({
-//                hideLoading()
-//                materials?.let {
-//                    materialsAdapter.materials = it
-//                }
-//            }, 1200)
-//
-//        mainBinding.rvMaterialsMain.adapter = materialsAdapter
-//    }
 
     private fun hideLoading() {
         mainBinding.swipeMain.isRefreshing = false

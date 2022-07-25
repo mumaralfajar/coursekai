@@ -5,16 +5,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.viewpager.widget.ViewPager
+import com.google.firebase.database.*
+import com.google.gson.Gson
 import com.mumaralfajar.coursekai.adapter.PagesAdapter
 import com.mumaralfajar.coursekai.databinding.ActivityContentBinding
+import com.mumaralfajar.coursekai.model.Content
 import com.mumaralfajar.coursekai.model.Material
 import com.mumaralfajar.coursekai.model.Page
 import com.mumaralfajar.coursekai.presentation.main.MainActivity
 import com.mumaralfajar.coursekai.repository.Repository
-import com.mumaralfajar.coursekai.utils.disabled
-import com.mumaralfajar.coursekai.utils.enabled
-import com.mumaralfajar.coursekai.utils.invisible
-import com.mumaralfajar.coursekai.utils.visible
+import com.mumaralfajar.coursekai.utils.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -27,8 +27,45 @@ class ContentActivity : AppCompatActivity() {
 
     private lateinit var contentBinding: ActivityContentBinding
     private lateinit var pagesAdapter: PagesAdapter
+    private lateinit var contentDatabase: DatabaseReference
     private var currentPosition = 0
     private var materialPosition = 0
+
+    private val listenerContent = object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            hideLoading()
+            if (snapshot.value != null) {
+                showData()
+
+                val json = Gson().toJson(snapshot.value)
+                val content = Gson().fromJson(json, Content::class.java)
+
+                pagesAdapter.pages = content?.pages as MutableList<Page>
+            } else {
+                showEmptyData()
+            }
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            hideLoading()
+            showDialogError(this@ContentActivity, error.message)
+        }
+
+    }
+
+    private fun showEmptyData() {
+        contentBinding.apply {
+            ivEmptyDataContent.visible()
+            vpContent.gone()
+        }
+    }
+
+    private fun showData() {
+        contentBinding.apply {
+            ivEmptyDataContent.gone()
+            vpContent.visible()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +73,8 @@ class ContentActivity : AppCompatActivity() {
         setContentView(contentBinding.root)
 
         pagesAdapter = PagesAdapter(this)
+        contentDatabase = FirebaseDatabase.getInstance().getReference("contents")
+
         getDataIntent()
         onAction()
         viewPagerCurrentPosition()
@@ -82,19 +121,28 @@ class ContentActivity : AppCompatActivity() {
 
     private fun getDataContent(material: Material) {
         showLoading()
-        val content = material.idMaterial?.let { Repository.getContents(this)?.get(it) }
+//        val content = material.idMaterial?.let { Repository.getContents(this)?.get(it) }
+        contentDatabase
+            .child(material.idMaterial.toString())
+            .addValueEventListener(listenerContent)
 
-        Handler(Looper.getMainLooper())
-            .postDelayed({
-                hideLoading()
+        contentBinding.vpContent.adapter = pagesAdapter
+        contentBinding.vpContent.setPagingEnabled(false)
 
-                pagesAdapter.pages = content?.pages as MutableList<Page>
-                contentBinding.vpContent.adapter = pagesAdapter
-                contentBinding.vpContent.setPagingEnabled(false)
+        val textIndex = "${currentPosition + 1} / ${pagesAdapter.count}"
+        contentBinding.tvIndexContent.text = textIndex
 
-                val textIndex = "${currentPosition + 1} / ${pagesAdapter.count}"
-                contentBinding.tvIndexContent.text = textIndex
-            }, 1200)
+//        Handler(Looper.getMainLooper())
+//            .postDelayed({
+//                hideLoading()
+//
+//                pagesAdapter.pages = content?.pages as MutableList<Page>
+//                contentBinding.vpContent.adapter = pagesAdapter
+//                contentBinding.vpContent.setPagingEnabled(false)
+//
+//                val textIndex = "${currentPosition + 1} / ${pagesAdapter.count}"
+//                contentBinding.tvIndexContent.text = textIndex
+//            }, 1200)
     }
 
     private fun showLoading() {
