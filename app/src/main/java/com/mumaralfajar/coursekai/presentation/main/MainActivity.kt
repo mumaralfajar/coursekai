@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         override fun onCancelled(error: DatabaseError) {
             hideLoading()
             Log.e("MainActivity", "[onCancelled] - ${error.message}")
-            showDialogError(this@MainActivity, error.message)
         }
     }
 
@@ -75,7 +74,6 @@ class MainActivity : AppCompatActivity() {
         override fun onCancelled(error: DatabaseError) {
             hideLoading()
             Log.e("MainActivity", "[onCancelled] - ${error.message}")
-            showDialogError(this@MainActivity, error.message)
         }
 
     }

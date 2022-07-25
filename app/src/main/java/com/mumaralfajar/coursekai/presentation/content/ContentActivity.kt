@@ -44,7 +44,6 @@ class ContentActivity : AppCompatActivity() {
 
         override fun onCancelled(error: DatabaseError) {
             hideLoading()
-            showDialogError(this@ContentActivity, error.message)
         }
 
     }
