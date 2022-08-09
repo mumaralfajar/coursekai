@@ -123,21 +123,6 @@
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
 
                 <Button
-                    android:id="@+id/btn_change_language_user"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/change_language"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:background="@drawable/bg_btn_auth_white"
-                    app:backgroundTint="@null"
-                    android:layout_marginBottom="@dimen/normal_100"
-                    android:layout_marginStart="@dimen/small_50"
-                    android:layout_marginEnd="@dimen/small_50"
-                    app:layout_constraintBottom_toTopOf="@id/btn_logout_user"
-                    app:layout_constraintStart_toStartOf="@id/guideline_start"
-                    app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
-
-                <Button
                     android:id="@+id/btn_change_password_user"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -147,7 +132,7 @@
                     android:layout_marginBottom="@dimen/normal_100"
                     android:layout_marginStart="@dimen/small_50"
                     android:layout_marginEnd="@dimen/small_50"
-                    app:layout_constraintBottom_toTopOf="@id/btn_change_language_user"
+                    app:layout_constraintBottom_toTopOf="@id/btn_logout_user"
                     app:layout_constraintStart_toStartOf="@id/guideline_start"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"/>
 
