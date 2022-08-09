@@ -116,7 +116,6 @@ class ContentActivity : AppCompatActivity() {
 
     private fun getDataContent(material: Material) {
         showLoading()
-//        val content = material.idMaterial?.let { Repository.getContents(this)?.get(it) }
         contentDatabase
             .child(material.idMaterial.toString())
             .addValueEventListener(listenerContent)
@@ -126,18 +125,6 @@ class ContentActivity : AppCompatActivity() {
 
         val textIndex = "${currentPosition + 1} / ${pagesAdapter.count}"
         contentBinding.tvIndexContent.text = textIndex
-
-//        Handler(Looper.getMainLooper())
-//            .postDelayed({
-//                hideLoading()
-//
-//                pagesAdapter.pages = content?.pages as MutableList<Page>
-//                contentBinding.vpContent.adapter = pagesAdapter
-//                contentBinding.vpContent.setPagingEnabled(false)
-//
-//                val textIndex = "${currentPosition + 1} / ${pagesAdapter.count}"
-//                contentBinding.tvIndexContent.text = textIndex
-//            }, 1200)
     }
 
     private fun showLoading() {

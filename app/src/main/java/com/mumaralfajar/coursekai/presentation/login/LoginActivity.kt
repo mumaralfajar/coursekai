@@ -75,7 +75,6 @@ class LoginActivity : AppCompatActivity() {
                 dialogLoading.dismiss()
                 showDialogError(this, it.message.toString())
             }
-
     }
 
     private fun checkValidation(email: String, pass: String): Boolean {

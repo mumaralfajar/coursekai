@@ -44,7 +44,6 @@ class ChangePasswordActivity : AppCompatActivity() {
                     changePasswordToServer(oldPass, newPass)
                 }
             }
-
             btnCloseChangePassword.setOnClickListener { finish() }
         }
     }

@@ -64,7 +64,6 @@ class MaterialsAdapter : RecyclerView.Adapter<MaterialsAdapter.ViewHolder>(), Fi
                 }
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity() {
             hideLoading()
             Log.e("MainActivity", "[onCancelled] - ${error.message}")
         }
-
     }
 
     private fun showEmptyData() {

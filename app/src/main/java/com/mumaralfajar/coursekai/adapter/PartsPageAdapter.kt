@@ -37,7 +37,6 @@ class PartsPageAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             markdownBinding.mdContent.addStyleSheet(css)
             markdownBinding.mdContent.loadMarkdown(partPage.content)
         }
-
     }
 
     class YoutubeViewHolder(private val youtubeBinding: LayoutYoutubeBinding)
@@ -50,7 +49,6 @@ class PartsPageAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
             })
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
